@@ -1,0 +1,160 @@
+//1️⃣ Insert an Element at a Given Index
+void insertElement(int arr[], int &n, int index, int value)
+{
+    // Shift all elements one position to the right
+    for(int i = n; i > index; i--)
+    {
+        arr[i] = arr[i - 1];
+    }
+
+    // Insert the new value
+    arr[index] = value;
+
+    // Increase array size
+    n++;
+}
+
+//Complexity for insert and delete
+
+//Time → O(n)
+//Space → O(1)
+
+//2️⃣ Delete an Element at a Given Index
+void deleteElement(int arr[], int &n, int index)
+{
+    // Shift elements to the left
+    for(int i = index; i < n - 1; i++)
+    {
+        arr[i] = arr[i + 1];
+    }
+
+    // Reduce array size
+    n--;
+}
+
+//3️⃣ Delete All Occurrences of an Element
+void deleteOccurrences(int arr[], int &n, int value)
+{
+    int j = 0;
+
+    // Copy only elements not equal to value
+    for(int i = 0; i < n; i++)
+    {
+        if(arr[i] != value)
+        {
+            arr[j] = arr[i];
+            j++;
+        }
+    }
+
+    // Update new size
+    n = j;
+}
+
+//4️⃣ Find Largest Element
+int largestElement(int arr[], int n)
+{
+    int largest = arr[0];
+
+    for(int i = 1; i < n; i++)
+    {
+        if(arr[i] > largest)
+        {
+            largest = arr[i];
+        }
+    }
+
+    return largest;
+}
+
+//5️⃣ Find Smallest Element
+int smallestElement(int arr[], int n)
+{
+    int smallest = arr[0];
+
+    for(int i = 1; i < n; i++)
+    {
+        if(arr[i] < smallest)
+        {
+            smallest = arr[i];
+        }
+    }
+
+    return smallest;
+}
+
+//6️⃣ Reverse an Array
+void reverseArray(int arr[], int n)
+{
+    int left = 0;
+    int right = n - 1;
+
+    while(left < right)
+    {
+        swap(arr[left], arr[right]);
+
+        left++;
+        right--;
+    }
+}
+
+//7️⃣ Left Rotate Array by One
+void leftRotate(int arr[], int n)
+{
+    int first = arr[0];
+
+    // Shift every element left
+    for(int i = 0; i < n - 1; i++)
+    {
+        arr[i] = arr[i + 1];
+    }
+
+    // Place first element at the end
+    arr[n - 1] = first;
+}
+
+Example
+
+Before: 1 2 3 4 5
+After: 2 3 4 5 1
+
+//8️⃣ Right Rotate Array by One
+void rightRotate(int arr[], int n)
+{
+    int last = arr[n - 1];
+
+    // Shift every element right
+    for(int i = n - 1; i > 0; i--)
+    {
+        arr[i] = arr[i - 1];
+    }
+
+    // Place last element at the beginning
+    arr[0] = last;
+}
+
+Example
+
+Before: 1 2 3 4 5
+After: 5 1 2 3 4
+
+//9️⃣ Remove Duplicates from a Sorted Array (Optimal)
+int removeDuplicates(int arr[], int n)
+{
+    // First element is always unique
+    int j = 0;
+
+    for(int i = 1; i < n; i++)
+    {
+        // Found a new unique element
+        if(arr[i] != arr[j])
+        {
+            j++;
+
+            arr[j] = arr[i];
+        }
+    }
+
+    // Return new size
+    return j + 1;
+}
