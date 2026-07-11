@@ -1,0 +1,36 @@
+🚀 Time Complexity Code Pattern
+
+|Time Complexity| Common Code Pattern                          |
+| ----------- | ------------------------------------------     |
+| O(1)        |   arr[index]                                   |
+| O(1)        |   x = y + z                                    |
+| O(1)        |   push(), pop(), top() (Stack)                 |
+| O(log n)    |   while(n > 1) { n = n / 2; }                  |
+| O(log n)    |   for(i = 1; i < n; i = i * 2)                 |
+| O(log n)    |   Binary Search (low, high, mid)               |
+| O(√n)       |   for(i = 1; i * i <= n; i++)                  |
+| O(n)        |   for(i = 0; i < n; i++)                       |
+| O(n)        |   while(i < n)                                 |
+| O(n)        |   for(element : array)                         |
+| O(n)        |   Loop 1 → Loop 2 (separate loops)             |
+| O(n log n)  |   sort()                                       |
+| O(n log n)  |   for(...) { Binary Search }                   |
+| O(n²)       |   for(...) { for(...) }                        |
+| O(n²)       |   while(...) { for(...) } (both run n times)   |
+| O(n³)       |   for(...) { for(...) { for(...) } }           |
+| O(2ⁿ)       |   func(n-1) + func(n-2)                        |
+| O(n!)       | Generate all permutations                      |
+
+
+💾 Space Complexity Pattern
+
+| Space    | Common Pattern          |
+| -------- | --------------------    |
+| O(1)     | Only variables          |
+| O(log n) | Recursive Binary Search |
+| O(n)     | Extra array             |
+| O(n)     | HashMap                 |
+| O(n)     | Stack                   |
+| O(n)     | Queue                   |
+| O(n)     | DFS Recursion           |
+| O(V+E)   | Graph                   |
