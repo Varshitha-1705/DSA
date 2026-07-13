@@ -1,0 +1,25 @@
+4 patterns:
+  1. constant window
+  2. longest subarray/substring where<condition>
+  3. number of subarray where <condition>
+  4. shortest/min window <condition>
+
+Q) longest subarray with sum<=k
+     arr=[2,5,1,7,10] k=14
+ans) (1) Brute->generate all subarray
+ALGO
+
+  maxlen
+  for(i=0->n-1)
+  {
+    sum=0
+    for(j=i->n-1)
+    {
+      sum=sum+arr[j];
+      if(sum<=k){
+        maxlen=max(maxlen,j-i+1);
+      }else if(sum>k)break;
+    }
+  }
+  print(maxlen);
+   
