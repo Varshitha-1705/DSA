@@ -1,0 +1,44 @@
+//sliding window used at both the ends 
+//Input: cardPoints = [1,2,3,4,5,6,1], k = 3
+//Output: 12
+//Explanation: After the first step, your score will always be 1. However, choosing the rightmost card first will maximize your total score. 
+//The optimal strategy is to take the three cards on the right, giving a final score of 1 + 6 + 5 = 12.
+
+int maxScore(vector<int>cp,int k){
+  int maxSum=0;
+  int n=cp.size();
+  int lsum=0,rsum=0;
+  for(int i=0;i<k;i++){
+    lsum+=cp[i];
+  }
+  maxSum=lsum;
+  int rindex=n-1;
+  for(int i=k-1;i>=0;i--){
+    lsum=cp[i];
+    rsum+=cp[rindex];
+    maxSum=max(maxSum,lsum+rsum);
+  }
+  return maxSum;
+}
+
+//this time complexity is O(2K) and space is O(1)
+
+
+
+//still optimmized and this runs faster and this give tc O(K),and sc O(1)
+
+int maxScore(vector<int>& cp, int k) {
+  int ans=0,ma=INT_MIN;
+  for(int i=0;i<k;i++){
+    ans+=cp[i];
+  }
+  for(int i=0;i<k;i++){
+    ma=max(ans,ma);
+    ans-=cp[k-1-i];
+    ans+=cp[cp.size()-1-i];
+  }
+  ma=max(ans,ma);
+  return ma;
+}
+
+
