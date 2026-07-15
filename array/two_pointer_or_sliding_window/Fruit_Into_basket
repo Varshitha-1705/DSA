@@ -14,6 +14,8 @@ Output: 4
 Explanation: We can pick from trees [2,3,2,2].
 If we had started at the first tree, we would only pick from trees [1,2].
 
+// this question can be seen as the maxlength subarray with at most 2 types of numbers 
+
 int totalFruit(vector<int>& arr) {
         int l=0,r=0,maxlen=0;
         unordered_map<int,int>mpp;
@@ -30,3 +32,15 @@ int totalFruit(vector<int>& arr) {
         return maxlen;
     }
 //tc:O(n) ,sc O(1) optimal solution
+
+//brute force :generate all the subarray
+
+        maxlen=0
+        for(i=0->n){
+                set<int>st;
+                for(j=i->n){
+                        st.add(arr[j])
+                        if(st.size()<=2)maxlen=max(maxlen,j-i+1);
+                        else break;
+                }
+        }
