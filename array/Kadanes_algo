@@ -1,0 +1,21 @@
+use on this type of problems:
+  Look for keywords such as:
+
+    Maximum subarray sum
+    Largest sum contiguous subarray
+    Maximum sum of consecutive elements
+    Best subarray with maximum total
+    Maximum profit from a continuous range
+
+TC:O(N) ,SC O(1)
+
+int maxSubArray(vector<int>& nums) {
+        int currentSum=0;
+        int maxsum=INT_MIN;
+        for(int i=0;i<nums.size();i++){
+            currentSum+=nums[i];
+            maxsum=max(maxsum,currentSum);
+            if(currentSum<0)currentSum=0;
+        }
+        return maxsum;
+    }
