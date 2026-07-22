@@ -22,7 +22,7 @@ int trap(vector<int>& ht) {
         return ans;
     }
 
-optimal solution tc:O(N) and SC:O(1)
+optimal solution tc:O(N) and SC:O(1) this is the two pointer approach
 
 int trap(vector<int>& ht) {
         int ans=0;
@@ -38,4 +38,33 @@ int trap(vector<int>& ht) {
             }
         }
         return ans;
+    }
+
+we can even solve this through the monotonic stack tc:O(N), SC:O(N)
+
+int trap(vector<int> &height)
+    {
+        int n = height.size(); 
+        int ans = 0;         
+        vector<int> stack;     // Stack to store indices of height elements
+        
+        for (int right = 0; right < n; right++)
+        {
+            
+            while (!stack.empty() && height[stack.back()] < height[right])
+            {
+                // If the current height is greater than the height at the top of the stack
+                int mid = stack.back(); // Get the index of the height at the top of the stack
+                stack.pop_back();       // Pop the index from the stack
+                // If the stack becomes empty, no more water can be trapped
+                if (stack.empty())
+                    break;
+                int left = stack.back();                                                      // Get the index of the next height from the top of the stack
+                int minHeight = min(height[right] - height[mid], height[left] - height[mid]); // Calculate the minimum height of the two borders
+                int width = right - left - 1;                                                 // Calculate the width between the left and right borders
+                water += minHeight * width;                                                   // Calculate the trapped water volume and add it to the total
+            }
+            stack.push_back(right); // Push the current index onto the stack
+        }
+        return water; // Return the total trapped water volume
     }
