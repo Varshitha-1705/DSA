@@ -2,7 +2,7 @@ Trie — Interview Cheat Sheet
 
 ## 1. What is a Trie?
 
-A **Trie** is a tree-based data structure used to store and search **strings efficiently**, especially when working with **prefixes**.
+A Trie is a tree-based data structure used to store and search **strings efficiently**, especially when working with **prefixes**.
 
 ### Key Idea
 
@@ -10,7 +10,7 @@ A **Trie** is a tree-based data structure used to store and search **strings eff
 
 Example:
 
-```text
+
 Words: cat, car, can
 
              ROOT
@@ -20,7 +20,7 @@ Words: cat, car, can
                a
              / | \
             t  r  n
-```
+
 
 The common prefix `ca` is stored only once.
 
@@ -28,7 +28,7 @@ The common prefix `ca` is stored only once.
 
 # 2. When to Think of Trie?
 
-Think **TRIE** when the problem involves:
+Think TRIE when the problem involves:
 
 * Strings / Words
 * Prefixes
@@ -43,19 +43,19 @@ Think **TRIE** when the problem involves:
 
 ### Golden Rule
 
-```text
+
 Many Strings
      +
 Prefix Operations
      ↓
     TRIE
-```
+
 
 ---
 
 # 3. Trie Node Structure
 
-```cpp
+
 class TrieNode {
 public:
     TrieNode* child[26];
@@ -69,23 +69,23 @@ public:
         }
     }
 };
-```
+
 
 ### What does `child[26]` mean?
 
-```cpp
+
 TrieNode* child[26];
-```
+
 
 It is an **array of 26 pointers**.
 
-```text
+
 child[0]  → a
 child[1]  → b
 child[2]  → c
 ...
 child[25] → z
-```
+
 
 Each pointer can point to another `TrieNode`.
 
@@ -99,9 +99,9 @@ It is **not a linked list**.
 
 # 4. Root
 
-```cpp
+
 TrieNode* root;
-```
+
 
 `root` is a pointer to the **starting node** of the Trie.
 
@@ -151,9 +151,9 @@ The Trie needs a starting point, so `root` is required.
 
 For lowercase English letters:
 
-```cpp
+
 int idx = ch - 'a';
-```
+
 
 Mapping:
 
@@ -167,9 +167,9 @@ Mapping:
 
 This lets us access:
 
-```cpp
+
 node->child[idx]
-```
+
 
 ---
 
@@ -180,52 +180,44 @@ node->child[idx]
 > Does a complete word end at this node?
 
 Suppose we insert:
-
-```text
 apple
-```
+
 
 Trie path:
 
-```text
+
 root → a → p → p → l → e
                           ↑
                      isEnd = true
-```
+
 
 Now:
 
-```cpp
+
 search("app")
-```
+
 
 The path exists, but `"app"` was not inserted as a complete word.
 
 Therefore:
 
-```text
+
 search("app") → false
-```
+
 
 But:
-
-```cpp
 startsWith("app")
-```
+
 
 returns:
-
-```text
 true
-```
+
 
 ### Remember:
-
-```text
 isEnd = true
     ↓
 A complete word ends here
-```
+
 
 ---
 
@@ -233,122 +225,112 @@ A complete word ends here
 
 ## A. INSERT
 
-### Goal:
-
-Add a word to the Trie.
-
-```text
-insert("cat")
-
-ROOT
- ↓
- c
- ↓
- a
- ↓
- t
- ↓
-isEnd = true
-```
-
-### Logic:
-
-```text
-Start at ROOT
+    ### Goal:
+    
+    Add a word to the Trie.
+    
+    
+    insert("cat")
+    
+    ROOT
      ↓
-For every character
+     c
      ↓
-Convert character to index
+     a
      ↓
-If child doesn't exist → Create Node
+     t
      ↓
-Move to child
-     ↓
-After complete word → isEnd = true
-```
-
-### Key Trick:
-
-> **If path doesn't exist → Create it**
+    isEnd = true
+    
+    
+    ### Logic:
+    
+    
+    Start at ROOT
+         ↓
+    For every character
+         ↓
+    Convert character to index
+         ↓
+    If child doesn't exist → Create Node
+         ↓
+    Move to child
+         ↓
+    After complete word → isEnd = true
+    
+    
+    ### Key Trick:
+    
+    > **If path doesn't exist → Create it**
 
 ---
 
 ## B. SEARCH
 
-### Goal:
-
-Check if an **exact word** exists.
-
-```text
-search("cat")
-```
-
-### Logic:
-
-```text
-Start at ROOT
-     ↓
-Follow every character
-     ↓
-If path missing → false
-     ↓
-After reaching last character
-     ↓
-Return isEnd
-```
-
-### Key Trick:
-
-> **Search = Path + isEnd**
+    ### Goal:
+    
+    Check if an **exact word** exists.
+    search("cat")
+    
+    
+    ### Logic:
+    
+    Start at ROOT
+         ↓
+    Follow every character
+         ↓
+    If path missing → false
+         ↓
+    After reaching last character
+         ↓
+    Return isEnd
+    
+    
+    ### Key Trick:
+    
+    > **Search = Path + isEnd**
 
 ---
 
 ## C. STARTS WITH
 
-### Goal:
-
-Check if any word starts with a prefix.
-
-```text
-startsWith("ca")
-```
-
-### Logic:
-
-```text
-Start at ROOT
-     ↓
-Follow every character of prefix
-     ↓
-If path missing → false
-     ↓
-If path exists → true
-```
-
-### Key Trick:
-
-> **StartsWith = Path only**
+    ### Goal:
+    Check if any word starts with a prefix.
+    
+    startsWith("ca")
+    
+    
+    ### Logic:
+    
+    Start at ROOT
+         ↓
+    Follow every character of prefix
+         ↓
+    If path missing → false
+         ↓
+    If path exists → true
+    
+    
+    ### Key Trick:
+    
+    > **StartsWith = Path only**
 
 ---
 
 # 9. Search vs StartsWith
 
 Suppose we inserted:
-
-```text
 apple
-```
+
 
 Then:
 
-```text
 search("app")       → false
 startsWith("app")   → true
-```
+
 
 Because:
 
-```text
 SEARCH
 → Complete word?
 → Check isEnd
@@ -356,20 +338,17 @@ SEARCH
 STARTSWITH
 → Prefix path exists?
 → Don't check isEnd
-```
+
 
 ### Memorize:
 
-```text
 search()      → Exact Word
 startsWith()  → Prefix
-```
 
 ---
 
 # 10. Complete Basic Trie Template
 
-```cpp
 class TrieNode {
 public:
     TrieNode* child[26];
@@ -440,7 +419,7 @@ public:
         return true;
     }
 };
-```
+
 
 ---
 
@@ -458,9 +437,8 @@ Let `L` = length of the word/prefix.
 
 For `N` words with maximum length `L`:
 
-```text
 Worst Case → O(N × L)
-```
+
 
 But common prefixes are shared, so practical space can be less.
 
@@ -470,11 +448,10 @@ But common prefixes are shared, so practical space can be less.
 
 ## Pattern 1: Basic Trie
 
-```text
 insert()
 search()
 startsWith()
-```
+
 
 ---
 
@@ -486,13 +463,12 @@ Problem:
 
 Approach:
 
-```text
 Find prefix node
       ↓
 DFS from that node
       ↓
 Collect all complete words
-```
+
 
 Used in:
 
@@ -509,9 +485,9 @@ Problem:
 
 Add:
 
-```cpp
+
 int prefixCount;
-```
+
 
 At every node.
 
@@ -525,22 +501,20 @@ Problem:
 
 Example:
 
-```text
+
 "c.t"
-```
+
 
 Approach:
 
-```text
+
 Normal character → Follow one child
 '.' → Try all 26 children
-```
+
 
 Usually:
-
-```text
 Trie + DFS / Backtracking
-```
+
 
 ---
 
@@ -552,25 +526,19 @@ Used for:
 
 Instead of 26 children:
 
-```cpp
 TrieNode* child[2];
-```
+
 
 Because numbers are represented using:
-
-```text
 0 and 1
-```
+
 
 Example:
-
-```text
 101101
-```
+
 
 ### Pattern:
 
-```text
 Numbers
 +
 Binary
@@ -578,13 +546,13 @@ Binary
 Maximum XOR
      ↓
 Binary Trie
-```
+
 
 ---
 
 # 13. Interview Recognition Cheat Code
 
-```text
+
 Is the problem about Strings?
         |
        YES
@@ -598,7 +566,6 @@ Is PREFIX important?
 
 ### Quick Recognition:
 
-```text
 Prefix search           → Trie
 Autocomplete             → Trie + DFS
 Search suggestions      → Trie + DFS
@@ -606,7 +573,7 @@ Word dictionary         → Trie
 Prefix counting         → Trie + Frequency
 Wildcard word search    → Trie + DFS
 Maximum XOR             → Binary Trie
-```
+
 
 ---
 
@@ -618,7 +585,10 @@ If interviewer asks:
 
 Say:
 
-> "I used a Trie because the problem involves efficient prefix-based string operations. Each Trie node stores pointers to possible next characters, and `isEnd` indicates whether a complete word ends at that node. During insertion, I create missing nodes while traversing each character. For exact word search, I traverse the word and check `isEnd` at the end. For prefix search, I only need to verify that the prefix path exists."
+> "I used a Trie because the problem involves efficient prefix-based string operations. 
+Each Trie node stores pointers to possible next characters, and `isEnd` indicates whether a complete word ends at that node.
+During insertion, I create missing nodes while traversing each character. 
+For exact word search, I traverse the word and check `isEnd` at the end. For prefix search, I only need to verify that the prefix path exists."
 
 ---
 
