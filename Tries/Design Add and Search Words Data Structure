@@ -24,3 +24,62 @@ wordDictionary.search("bad"); // return True
 wordDictionary.search(".ad"); // return True
 wordDictionary.search("b.."); // return True
  
+class WordDictionary {
+public:
+    struct Node {
+        Node* children[26] = {};
+        bool is_word = false;
+    };
+
+    Node* root;
+
+    WordDictionary() : root(new Node()) {}
+    
+    void addWord(string word) {
+        Node* cur = root;
+        for (char c : word)
+        {
+            if (cur->children[c - 'a'])
+            {
+                cur = cur->children[c - 'a'];
+            }
+            else
+            {
+                Node* new_node = new Node();
+                cur->children[c - 'a'] = new_node;
+                cur = cur->children[c - 'a'];
+            }
+        }
+        cur->is_word = true;
+    }
+    
+    bool search(string word) {
+        return search_helper(word, root, 0);
+    }
+    
+    bool search_helper(string& word, Node* cur, int index)
+    {
+        if (index == word.length()) return cur->is_word;
+        char c = word[index];
+        if (c != '.')
+        {
+            if (cur->children[c - 'a']) return search_helper(word, cur->children[c - 'a'], index + 1);
+            else return false;
+        }
+        else
+        {
+            for (auto child : cur->children)
+            {
+                if (child && search_helper(word, child, index + 1))    return true;
+            }
+            return false;
+        }
+    }
+};
+
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * WordDictionary* obj = new WordDictionary();
+ * obj->addWord(word);
+ * bool param_2 = obj->search(word);
+ */
