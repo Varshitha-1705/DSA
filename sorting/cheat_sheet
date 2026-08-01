@@ -1,0 +1,9 @@
+| Problem asks...                                 | Your thought                                  |
+| ----------------------------------------------- | --------------------------------------------- |
+| Find minimum repeatedly and place it            | 🟢 Selection Sort                             |
+| Compare neighboring elements repeatedly         | 🟢 Bubble Sort                                |
+| Insert each element into already sorted portion | 🟢 Insertion Sort                             |
+| Need O(n) sorting for 0,1,2                     | 🔵 Maybe Dutch National Flag                  |
+| Need to find an element quickly in sorted array | 🟡 Binary Search                              |
+| Need frequency/count                            | 🟣 HashMap                                    |
+| Need pair with a target                         | 🟣 HashMap / Two Pointer depending on problem |
