@@ -79,4 +79,6 @@ int main() {
 
     return 0;
 }
-Complexity Analysis
+
+Time Complexity: O(V+E),Each vertex is visited exactly once, and each edge is processed at most twice (once from each end).
+Space Complexity: O(V+E), To build Adjacency List.
