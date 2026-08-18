@@ -15,4 +15,31 @@ isConnected[i][j] is 1 or 0.
 isConnected[i][i] == 1
 isConnected[i][j] == isConnected[j][i]
 
+class Solution {
+public:
+    void dfs(vector<vector<int>>& isConnected, int i, vector<int> &vis){
+        
+        vis[i] = true;
+        for(int k=0;k<isConnected[i].size();k++)
+        {
+            if(isConnected[i][k]==1 && vis[k]==0 ){
+                dfs(isConnected,k,vis);
+            }
+        }
+    }
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        int n = isConnected.size();
+        int m = isConnected[0].size();
+        int count = 0;
 
+        vector<int> vis(m,0);
+        for(int i=0;i<n;i++){
+            if(!vis[i]){
+                dfs(isConnected,i,vis);
+                count++;
+            }
+        }
+
+        return count;
+    }
+};
