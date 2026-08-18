@@ -43,3 +43,6 @@ public:
         return count;
     }
 };
+
+Time Complexity:O(N)
+Space Complexity:O(1)
