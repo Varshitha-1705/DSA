@@ -56,3 +56,10 @@ public:
         return result;
     }
 };
+
+TC: O(N^(T/M) × T)
+SC: O(T/M) (excluding result)
+
+N = number of candidates
+T = target
+M = minimum candidate value
