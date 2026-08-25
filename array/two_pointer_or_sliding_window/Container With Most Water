@@ -1,4 +1,24 @@
 
+Update the maximum area:
+The purpose of this condition is to determine which pointer to move inward, either the left pointer (i) or the right pointer (j), 
+based on the comparison of heights at their respective positions.
+
+Imagine you have two containers represented by the heights at the left and right pointers. 
+The condition checks which container has a smaller height and moves the pointer corresponding to that container.
+
+If height[i] > height[j]:
+
+This means that the height of the left container is greater than the height of the right container.
+Moving the right pointer (j) would not increase the potential area because the height of the right container is the limiting factor.
+So, to explore containers with the possibility of greater areas, we need to move the right pointer inward by decrementing j.
+If height[i] <= height[j]:
+
+This means that the height of the left container is less than or equal to the height of the right container.
+Moving the left pointer (i) would not increase the potential area because the height of the left container is the limiting factor.
+So, to explore containers with the possibility of greater areas, we need to move the left pointer inward by incrementing i.
+By making these pointer movements, we ensure that we are always exploring containers with the potential for larger areas. The approach is based on the observation that increasing the width of the container can only lead to a larger area if the height of the new boundary is greater.
+By following this condition and moving the pointers accordingly, the algorithm explores all possible containers and finds the one with the maximum area.
+
 class Solution {
 public:
     int maxArea(vector<int>& height) {
