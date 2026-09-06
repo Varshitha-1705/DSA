@@ -16,3 +16,22 @@ Output: [3,99,-1,-100]
 Explanation: 
 rotate 1 steps to the right: [99,-1,-100,3]
 rotate 2 steps to the right: [3,99,-1,-100]
+
+class Solution {
+public:
+
+void reverse(vector<int>& arr, int i, int j){
+    while(i < j){
+        swap(arr[i], arr[j]);
+        i++;
+        j--;
+    }
+}
+    void rotate(vector<int>& arr, int k) {
+        int n = arr.size();
+        k = k%n;
+        reverse(arr, 0, n-k-1);
+        reverse(arr, n-k, n-1);
+        reverse(arr, 0, n-1);
+    }
+};
