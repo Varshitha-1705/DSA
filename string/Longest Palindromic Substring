@@ -18,3 +18,53 @@ Constraints:
 s consist of only digits and English letters.
 
 
+class Solution {
+public:
+    string longestPalindrome(string& s) {
+        int sizeP = (2 * s.size()) + 3;
+        string p;
+        p.reserve(sizeP);
+        p += "$%";
+        for(char c : s) {
+            p += c;
+            p += '%';
+        }
+        p += '^';
+
+        vector<int> radius(sizeP, 0);
+        int bestPaddedCenter = 0;
+        int bestPaddedRadius = 0;
+        int referenceCenter = 0;
+        int referenceRight = 0;
+
+        for(int c = 2; c < sizeP - 2; ++c) {
+            int& currentRadius = radius[c];
+
+            if(c < referenceRight) {
+                int mirrorC = referenceCenter - (c - referenceCenter);
+                currentRadius = min(radius[mirrorC], referenceRight - c);
+            }
+            
+            while(p[c - currentRadius - 1] == p[c + currentRadius + 1]) {
+                ++currentRadius;
+            }
+
+            int currentRight = c + currentRadius;
+            if(currentRight > referenceRight) {
+                referenceCenter = c;
+                referenceRight = currentRight;
+            }
+
+            if(currentRadius > bestPaddedRadius) {
+                bestPaddedCenter = c;
+                bestPaddedRadius = currentRadius;
+            }
+        }
+
+        int bestSize = bestPaddedRadius;
+        int bestPaddedStart = bestPaddedCenter - bestPaddedRadius;
+        int bestStart = (bestPaddedStart - 1) / 2;
+
+        return s.substr(bestStart, bestSize);
+    }
+};
