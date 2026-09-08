@@ -45,3 +45,7 @@ public:
         return dp[n - 1];        
     }
 };
+
+Complexity
+Time Complexity: O(n) — A single loop processes all houses.
+Space Complexity: O(n) — The dp array stores results for all houses.
