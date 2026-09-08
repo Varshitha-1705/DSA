@@ -58,3 +58,22 @@ Approach
 Variables
 prev_rob: Maximum profit if the thief robs up to house i-2.
 max_rob: Maximum profit if the thief robs up to house i-1.
+
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int prevRob = 0;
+        int maxRob = 0;
+
+        for (int curValue : nums) {
+            int temp = max(maxRob, prevRob + curValue);
+            prevRob = maxRob;
+            maxRob = temp;
+        }
+
+        return maxRob;        
+    }
+};
+Complexity
+Time Complexity: O(n) — A single loop processes all houses.
+Space Complexity: O(1) — Only two variables are used.
