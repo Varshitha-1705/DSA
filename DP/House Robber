@@ -1,1 +1,26 @@
+The House Robber problem is a classic dynamic programming problem where you must calculate the maximum amount of money a thief can steal without alerting security systems 
+by robbing two adjacent houses. Below are explanations for two approaches to solve this problem, both leveraging Dynamic Programming (DP) but with different implementations.
+
+Solution 1: Dynamic Programming with an Array
+Problem Recap
+A thief is robbing houses along a street, but they can't rob two consecutive houses. Each house has a certain amount of money, and the goal is to maximize the amount stolen without breaking the rule.
+
+Approach
+Key Observations
+If a thief robs house i, they cannot rob house i-1 due to the constraints.
+If the thief skips house i, their maximum profit up to house i is the same as the profit for house i-1.
+DP Definition
+Let dp[i] represent the maximum amount of money that can be stolen from the first i+1 houses.
+
+State Transition
+The thief has two options at house i:
+
+Skip the house: Maximum profit is the same as the previous house, dp[i-1].
+Rob the house: Add the value of the house to the profit two houses back, nums[i] + dp[i-2].
+Thus, the recurrence relation is:
+
+dp[i] = max(dp[i-1], nums[i] + dp[i-2])
+Base Cases
+If there is only one house, the maximum profit is simply nums[0].
+For two houses, take the maximum value between the two: max(nums[0], nums[1]).
 
