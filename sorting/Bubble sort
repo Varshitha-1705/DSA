@@ -1,1 +1,4 @@
+The best case occurs if the given array is already sorted. We can reduce the time complexity to O(N) by just adding a small check inside the loops.
+We will check in the first iteration if any swap is taking place. If the array is already sorted no swap will occur and we will break out from the loops.
+Thus the iteration of the outer loop will be just 1. And our overall time complexity will be O(N).
 
