@@ -15,3 +15,34 @@ From the first 3 customers, we collect three $5 bills in order.
 From the fourth customer, we collect a $10 bill and give back a $5.
 From the fifth customer, we give a $10 bill and a $5 bill.
 Since all customers got correct change, we output true.
+
+class Solution {
+public:
+    bool lemonadeChange(vector<int>& bills) {
+        int five_dollars = 0, ten_dollars = 0;
+        
+        for (int x : bills) {
+            if (x == 5) {
+                five_dollars++;
+            } else if (x == 10) {
+                if (five_dollars > 0) {
+                    five_dollars--;
+                    ten_dollars++;
+                } else {
+                    return false;
+                }
+            } else {
+                if (five_dollars > 0 && ten_dollars > 0) {
+                    five_dollars--;
+                    ten_dollars--;
+                } else if (five_dollars > 2) {
+                    five_dollars -= 3;
+                } else {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+};
