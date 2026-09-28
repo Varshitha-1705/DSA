@@ -118,3 +118,8 @@ int main() {
     printList(head);
     return 0;
 }
+
+Complexity Analysis
+Time Complexity: O(N), one traversal counts values and one traversal rewrites values.
+
+Space Complexity: O(1), only three counters and a few pointers are used.
