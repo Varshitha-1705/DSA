@@ -1,1 +1,17 @@
+Given the head of a singly linked list, where every node contains only 0, 1, or 2, sort the linked list in non-decreasing order.
 
+Return the head of the sorted linked list. Linked list examples appear in array form for compact representation.
+
+Example 1
+Input: [1, 2, 0, 1, 2, 0, 1]
+
+Output: [0, 0, 1, 1, 1, 2, 2]
+
+Explanation: All 0 values move to the front, followed by all 1 values, followed by all 2 values.
+
+Example 2
+Input: [2, 2, 1, 0]
+
+Output: [0, 1, 2, 2]
+
+Explanation: Sorted order places the single 0 first, the single 1 next, and both 2 values at the end.
