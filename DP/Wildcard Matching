@@ -16,3 +16,48 @@ Example 2:
 Input: s = "aa", p = "*"
 Output: true
 Explanation: '*' matches any sequence.
+
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int i = 0, j = 0;
+
+        int star = -1;
+        int match = 0;
+
+        while (i < s.size()) {
+
+            // Characters match or '?' matches one character
+            if (j < p.size() &&
+                (p[j] == '?' || p[j] == s[i])) {
+                i++;
+                j++;
+            }
+
+            // Remember the position of '*'
+            else if (j < p.size() && p[j] == '*') {
+                star = j;
+                match = i;
+                j++;
+            }
+
+            // Mismatch: use the previous '*'
+            else if (star != -1) {
+                j = star + 1;
+                match++;
+                i = match;
+            }
+
+            // No '*' available to handle mismatch
+            else {
+                return false;
+            }
+        }
+
+        // Remaining pattern characters must all be '*'
+        while (j < p.size() && p[j] == '*')
+            j++;
+
+        return j == p.size();
+    }
+};
