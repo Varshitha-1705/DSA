@@ -36,3 +36,8 @@ public:
         return ans == INT_MAX ? 0 : ans;
     }
 };
+Time complexity: O(n)
+
+Although there are nested loops, each element is added to the window once and removed from the window at most once.
+
+Space complexity: O(1)
