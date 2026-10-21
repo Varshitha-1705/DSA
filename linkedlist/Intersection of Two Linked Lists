@@ -15,3 +15,16 @@ Input: listA = [1, 2, 3], listB = [4, 5]
 Output: null
 
 Explanation: No node reference is common between the two linked lists.
+
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode* first=headA;
+        ListNode* second=headB;
+        while(first!=second){
+            first=(first==nullptr)?headB:first->next;
+            second=(second==nullptr)?headA:second->next;
+        }
+        return first;
+    }
+};
