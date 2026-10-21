@@ -1,1 +1,17 @@
+Given heads of two singly linked lists, find the first common node where both lists intersect and form a Y-shaped structure. From the intersection point onward, both linked lists share the same node sequence by reference.
 
+Return the intersection node. Return null when no intersection exists. Node identity, not node value, determines intersection.
+
+Example 1
+Input: listA = [4, 1, 8, 4, 5], listB = [5, 6, 1, 8, 4, 5], shared node value = 8
+
+Output: 8
+
+Explanation: Both linked lists start sharing the same node sequence from value 8.
+
+Example 2
+Input: listA = [1, 2, 3], listB = [4, 5]
+
+Output: null
+
+Explanation: No node reference is common between the two linked lists.
