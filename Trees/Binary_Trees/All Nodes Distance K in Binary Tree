@@ -9,8 +9,8 @@ Explanation: The nodes that are a distance 2 from the target node (with value 5)
  *     TreeNode *left;
  *     TreeNode *right;
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
+  };
+
 
 class Solution {
 public:
