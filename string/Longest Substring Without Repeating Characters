@@ -10,3 +10,24 @@ Example 2:
 Input: s = "bbbbb"
 Output: 1
 Explanation: The answer is "b", with the length of 1.
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int n = s.length();
+        int len =0;
+        int maxLen = 0;
+        int left =0;
+        vector<int>lps(256,-1);
+        for(int right=0;right<n;right++){
+            char ch = s[right];
+            if(lps[ch]>=left){
+                left = lps[ch]+1;
+            }
+            lps[ch]= right;
+            len = right-left+1;
+            maxLen = max(maxLen, len);
+        }
+        return maxLen;
+    }
+};
