@@ -9,3 +9,54 @@ Example 2:
 
 Input: n = 1
 Output: [[1]]
+
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")
+
+#include <vector>
+#include <iostream>
+
+static const auto _ = []() noexcept {
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    std::cout.tie(nullptr);
+    return 0;
+}();
+
+class Solution {
+public:
+    std::vector<TreeNode*> generateTrees(int n) noexcept {
+        if (n == 0) return {};
+
+        static constexpr int CATALAN[9] = {1, 1, 2, 5, 14, 42, 132, 429, 1430};
+        std::vector<TreeNode*> dp[10][10];
+
+        // Base case: empty ranges contain a single nullptr subtree
+        for (int i = 1; i <= n + 1; ++i) {
+            dp[i][i - 1].push_back(nullptr);
+        }
+
+        // Build all intervals [l, r] by increasing length
+        for (int len = 1; len <= n; ++len) {
+            const int maxL = n - len + 1;
+            for (int l = 1; l <= maxL; ++l) {
+                const int r = l + len - 1;
+                auto& cur = dp[l][r];
+                cur.reserve(CATALAN[len]);
+
+                for (int rootVal = l; rootVal <= r; ++rootVal) {
+                    const auto& leftTrees = dp[l][rootVal - 1];
+                    const auto& rightTrees = dp[rootVal + 1][r];
+
+                    for (TreeNode* left : leftTrees) {
+                        for (TreeNode* right : rightTrees) {
+                            cur.push_back(new TreeNode(rootVal, left, right));
+                        }
+                    }
+                }
+            }
+        }
+
+        return std::move(dp[1][n]);
+    }
+};
