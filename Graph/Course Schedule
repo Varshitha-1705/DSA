@@ -17,3 +17,33 @@ Input: numCourses = 2, prerequisites = [[1,0],[0,1]]
 Output: false
 Explanation: There are a total of 2 courses to take. 
 To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.
+
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        int m = prerequisites.size();
+        vector<int> indeg(numCourses, 0), start(numCourses + 1, 0), adj(m), q(numCourses);
+
+        for (const auto& p : prerequisites) {
+            ++start[p[1] + 1];
+            ++indeg[p[0]];
+        }
+        for (int i = 0; i < numCourses; ++i) start[i + 1] += start[i];
+
+        vector<int> pos(start.begin(), start.end() - 1);
+        for (const auto& p : prerequisites) adj[pos[p[1]]++] = p[0];
+
+        int head = 0, tail = 0;
+        for (int i = 0; i < numCourses; ++i)
+            if (indeg[i] == 0) q[tail++] = i;
+
+        while (head < tail) {
+            int u = q[head++];
+            for (int k = start[u]; k < start[u + 1]; ++k) {
+                if (--indeg[adj[k]] == 0) q[tail++] = adj[k];
+            }
+        }
+        return tail == numCourses;
+    }
+};
+
