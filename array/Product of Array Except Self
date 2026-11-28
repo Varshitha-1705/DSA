@@ -14,3 +14,31 @@ Example 2:
 
 Input: nums = [-1,1,0,-3,3]
 Output: [0,0,9,0,0]
+
+#include <vector>
+
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+        int n = nums.size();
+        std :: vector<int> ans(n , 1);
+
+        int pre = 1;
+
+        for (int i = 0; i < n; i++)
+        {
+            ans[i] *= pre;
+            pre *= nums[i];
+        }
+
+        int suf = 1;
+
+        for (int i = n - 1; i >= 0; i--)
+        {
+            ans[i] *= suf;
+            suf *= nums[i];
+        }
+
+        return ans;
+    }
+};
